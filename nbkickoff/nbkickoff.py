@@ -11,6 +11,9 @@ import webbrowser
 from notebook import notebookapp
 from notebook.utils import url_path_join, url_escape
 
+import subprocess
+CREATE_NEW_CONSOLE = 0x10
+
 
 def is_relative_to(path, root_path):
     try:
@@ -30,6 +33,13 @@ def find_running_server(notebook_file):
         return None
 
 
+def launch_detached_process(*args):
+    if sys.platform == 'win32':
+        subprocess.Popen(args, close_fds=True, creationflags=CREATE_NEW_CONSOLE)
+    else:
+        os.spawnv(os.P_NOWAIT, args[0], args)
+
+
 def open_notebook(notebook_file):
     """Open the given IPython Notebook file in an existing or a new Jupyter Notebook server"""
     server = find_running_server(notebook_file)
@@ -44,8 +54,7 @@ def open_notebook(notebook_file):
         browser.open_new_tab(url)
     else:
         logging.info("Starting new Jupyter server to serve notebook file")
-        os.spawnv(os.P_DETACH if sys.platform == 'win32' else os.P_NOWAIT,
-                  sys.executable, [sys.executable, '-m', 'notebook', '--NotebookApp.open_browser=True', notebook_file])
+        launch_detached_process(sys.executable, '-m', 'notebook', '--NotebookApp.open_browser=True', notebook_file)
 
 
 def kickoff(template_file, target_file):
