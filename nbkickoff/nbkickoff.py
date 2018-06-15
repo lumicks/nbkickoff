@@ -8,11 +8,13 @@ import shutil
 import sys
 import webbrowser
 
+import subprocess
+CREATE_NEW_CONSOLE = 0x10
+
 from notebook import notebookapp
 from notebook.utils import url_path_join, url_escape
 
-import subprocess
-CREATE_NEW_CONSOLE = 0x10
+from .template import create_notebook_from_template
 
 
 def is_relative_to(path, root_path):
@@ -58,12 +60,7 @@ def open_notebook(notebook_file):
 
 
 def kickoff(template_file, target_file):
-    # Create file from template
-    if os.path.exists(target_file):
-        raise FileExistsError('Target notebook file already exists')
-    shutil.copy(template_file, target_file)
-
-    # Open the created notebook file
+    create_notebook_from_template(template_file, target_file, {})
     open_notebook(target_file)
 
 

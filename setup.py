@@ -7,7 +7,7 @@ if sys.version_info[:2] < (3, 6):
     print("Python >= 3.6 is required.")
     sys.exit(-1)
 
-requires = ['notebook>=5.5.0']
+requires = ['notebook>=5.5.0', 'nbformat>=4.4']
 
 
 def about(package):
