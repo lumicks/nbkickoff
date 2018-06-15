@@ -1,5 +1,5 @@
 __title__ = 'nbkickoff'
-__version__ = '0.0.1'
+__version__ = '0.1.0'
 __summary__ = 'Launch an IPython Notebook from a template notebook file'
 __url__ = 'https://github.com/lumicks/nbkickoff'
 
