@@ -34,6 +34,7 @@ setup(
     version=info['__version__'],
     description=info['__summary__'],
     long_description=read('README.md'),
+    long_description_content_type='text/markdown',
     url=info['__url__'],
     license=info['__license__'],
 
@@ -43,12 +44,21 @@ setup(
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Framework :: Jupyter',
+        'License :: OSI Approved :: Apache Software License',
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 3 :: Only',
         'Programming Language :: Python :: 3.6',
         'Topic :: Scientific/Engineering',
     ],
 
-    packages=find_packages(exclude=['test*']),
+    entry_points={
+        'console_scripts': [
+            'nbkickoff=nbkickoff.nbkickoff:main',
+        ],
+    },
+
+    python_requires='>=3',
     install_requires=requires,
+    packages=find_packages(exclude=['test*']),
+    include_package_data=True
 )

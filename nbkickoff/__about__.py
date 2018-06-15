@@ -6,4 +6,4 @@ __url__ = 'https://github.com/lumicks/nbkickoff'
 __author__ = 'Lumicks B.V.'
 __copyright__ = '2018, ' + __author__
 __email__ = 'devteam@lumicks.com'
-__license__ = ''
+__license__ = 'Apache License 2.0'
